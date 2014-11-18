@@ -15,8 +15,7 @@ namespace PointCX
 
             DynamicLibrary::~DynamicLibrary()
             {
-				printf("Release DynamicLibrary");
-                if(d_handle_p)
+				if(d_handle_p)
                 {
                     ::FreeLibrary((HMODULE)d_handle_p);
                     d_handle_p = NULL;

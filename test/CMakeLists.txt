@@ -14,6 +14,6 @@ SET(SRC_LIST DynamicLibrary.t.cpp
 INCLUDE_DIRECTORIES(${LOKI}/include)
 
 add_definitions(-DBUILD_DLL)
-ADD_LIBRARY(hello_dll SHARED hello_dll.cpp)
+ADD_LIBRARY(hello_dll SHARED hello_dll.c)
 
 ADD_EXECUTABLE(dynamic_lib.t ${SRC_LIST})
