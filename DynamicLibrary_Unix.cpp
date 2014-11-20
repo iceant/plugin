@@ -31,7 +31,8 @@ namespace PointCX
                 }
 
                 void* handle;
-                handle = dlopen(libPath, RTLD_NOW);
+                //handle = dlopen(libPath, RTLD_NOW);
+                handle = dlopen(libPath, RTLD_LAZY);
                 if(!handle)
                 {
                     error = dlerror();

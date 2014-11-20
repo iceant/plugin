@@ -5,7 +5,6 @@
 #include <loki/SmartPtr.h>
 #include <loki/Singleton.h>
 #include <boost/filesystem.hpp>
-#include <boost/shared_ptr.hpp>
 #include <string>
 #include <map>
 #include <vector>
@@ -26,15 +25,15 @@ namespace PointCX
         class PluginManager_i
         {
             public:
-            //typedef boost::shared_ptr<pcx::DynamicLibrary> DynamicLibraryPtr;
-			typedef Loki::SmartPtr<pcx::DynamicLibrary> DynamicLibraryPtr;
-            
-			DynamicLibraryPtr NULL_LIB_PTR;
-			
-			typedef std::map<std::string, DynamicLibraryPtr > DynamicLibraryMap;
-            typedef std::vector<PF_ExitFunc> ExitFuncVec;
-            typedef std::vector<PF_RegisterParams> RegistrationVec;
-            typedef std::map<std::string, PF_RegisterParams> RegistrationMap;
+                //typedef boost::shared_ptr<pcx::DynamicLibrary> DynamicLibraryPtr;
+                typedef Loki::SmartPtr<pcx::DynamicLibrary> DynamicLibraryPtr;
+
+                DynamicLibraryPtr NULL_LIB_PTR;
+
+                typedef std::map<std::string, DynamicLibraryPtr > DynamicLibraryMap;
+                typedef std::vector<PF_ExitFunc> ExitFuncVec;
+                typedef std::vector<PF_RegisterParams> RegistrationVec;
+                typedef std::map<std::string, PF_RegisterParams> RegistrationMap;
 
             public:
                 PF_PlatformServices d_PlatformServices;
@@ -55,20 +54,20 @@ namespace PointCX
 
                 ~PluginManager_i()
                 {
-					d_DynamicLibMap.clear();
+                    d_DynamicLibMap.clear();
                     d_ExactMatchMap.clear();
                     d_WildCardVec.clear();
                     d_ExitFuncVec.clear();
                 }
 
-               DynamicLibraryPtr loadLibrary(const std::string& path, 
+                DynamicLibraryPtr loadLibrary(const std::string& path, 
                         std::string& err)
                 {
                     pcx::DynamicLibrary *d = pcx::DynamicLibrary::load(path.c_str(), err);
                     if(!d)
                         return NULL_LIB_PTR;
-					
-					DynamicLibraryPtr ptr(d);
+
+                    DynamicLibraryPtr ptr(d);
                     d_DynamicLibMap[path]=ptr;
                     return ptr;
                 }
@@ -139,7 +138,7 @@ namespace PointCX
             //Dont load the same library 
             if(d_this->d_DynamicLibMap.find(dl_path.string())!=d_this->d_DynamicLibMap.end())
             {
-              return -1; 
+                return -1; 
             }
 
             std::string err;
@@ -256,7 +255,7 @@ namespace PointCX
 
             PluginManager &pm = getInstance();
 
-            
+
             //Verify that versions match
             PF_PluginAPI_Version v = pm.d_this->d_PlatformServices.version;
             if(v.major !=params->version.major)
@@ -277,7 +276,7 @@ namespace PointCX
             }
 
             pm.d_this->d_ExactMatchMap[key] = *params;
-			return 0;
+            return 0;
         }
 
 
